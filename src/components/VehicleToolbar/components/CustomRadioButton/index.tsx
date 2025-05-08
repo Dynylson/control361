@@ -30,7 +30,7 @@ export function CustomRadioGroup({ options, value, onChange, name }: CustomRadio
                     onChange={() => onChange(option.value)}
                     className="hidden"
                 />
-                <span className="text-white">{option.label}</span>
+                <span className="text-white font-medium">{option.label}</span>
                 </label>
             ))}
         </div>
