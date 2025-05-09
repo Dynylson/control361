@@ -13,5 +13,5 @@
   - [ ] Nos detalhes, deve haver um **link que abre o Google Maps** nas **coordenadas do veículo**.
 
 - 🎯 **Filtros**
-  - [ ] Filtro por **placa do veículo**.
-  - [ ] Filtro por **número da frota**.
+  - [X] Filtro por **placa do veículo**.
+  - [X] Filtro por **número da frota**.
