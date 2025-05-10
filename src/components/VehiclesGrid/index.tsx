@@ -119,7 +119,7 @@ export function VehiclesGrid() {
             </div>
             )}
             
-            <div ref={ref} className="h-2"></div>
+            <div ref={ref}></div>
         </div>
         </div>
     );
