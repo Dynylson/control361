@@ -1,24 +1,20 @@
-import { useState } from "react";
 import { CustomRadioGroup } from "../CustomRadioButton";
+import { useVehicles } from "../../../../hooks/useVehicles";
 
 export function VehicleType() {
-    const [selectedValue, setSelectedValue] = useState('');
+    const { vehicleType, setVehicleType } = useVehicles();
 
-    const handleRadioChange = (value: string) => {
-        setSelectedValue(value);
-    };
-
-    const options = [
-        { value: 'tracked', label: 'Rastreados' },
-        { value: 'others', label: 'Outros' },
-    ];
+  const options = [
+    { value: 'tracked', label: 'Rastreados' },
+    { value: 'others', label: 'Outros' },
+  ];
 
     return (
         <div>
             <CustomRadioGroup 
                 options={options} 
-                value={selectedValue} 
-                onChange={handleRadioChange} 
+                value={vehicleType} 
+                onChange={setVehicleType} 
                 name="vehicleTypes"
             />
         </div>
