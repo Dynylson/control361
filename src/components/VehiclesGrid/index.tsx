@@ -2,16 +2,14 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { api } from "../../services/axios";
 import { useInView } from "react-intersection-observer";
 
-const PER_PAGE = 20;
-
 interface Vehicle {
     id: string;
     plate: string;
     fleet: string | null;
-    type: string;
+    type: 'vehicle' | 'implement';
     model: string;
     nameOwner: string;
-    status: string;
+    status: 'active';
 }
 
 export type FetchVehiclesResponse = {
@@ -23,6 +21,17 @@ export type FetchVehiclesResponse = {
         page: number;
         perPage: number;
     };
+};
+
+const PER_PAGE = 20;
+
+const vehicleTypesMap = {
+    vehicle: 'Veículo',
+    implement: 'Implemento',
+};
+
+const vehicleStatusMap = {
+    active: 'Ativo',
 };
 
 export function VehiclesGrid() {
@@ -96,9 +105,9 @@ export function VehiclesGrid() {
                 <tr key={vehicle.id} className="text-center text-[#C8C8C8] hover:bg-[#002D44]/10">
                     <td className="w-1/5 px-4 py-4 border-r border-[#002D44]">{vehicle.plate}</td>
                     <td className="w-1/5 px-4 py-4 border-r border-[#002D44]">{vehicle.fleet || '-'}</td>
-                    <td className="w-1/5 px-4 py-4 border-r border-[#002D44]">{vehicle.type}</td>
+                    <td className="w-1/5 px-4 py-4 border-r border-[#002D44]">{vehicleTypesMap[vehicle.type]}</td>
                     <td className="w-1/5 px-4 py-4 border-r border-[#002D44]">{vehicle.model}</td>
-                    <td className="w-1/5 px-4 py-4">{vehicle.status}</td>
+                    <td className="w-1/5 px-4 py-4">{vehicleStatusMap[vehicle.status]}</td>
                 </tr>
                 ))}
             </tbody>
