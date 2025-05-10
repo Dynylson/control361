@@ -5,8 +5,8 @@
   - [ ] Deve ser **atualizado automaticamente a cada 2 minutos** com os dados mais recentes.
 
 - 📋 **Lista de Veículos**
-  - [ ] Deve carregar **20 veículos por vez**.
-  - [ ] Deve possuir **scroll infinito**, carregando mais veículos ao chegar ao final da lista.
+  - [X] Deve carregar **20 veículos por vez**.
+  - [X] Deve possuir **scroll infinito**, carregando mais veículos ao chegar ao final da lista.
 
 - 🔍 **Detalhes do Veículo**
   - [ ] Ao clicar em um veículo, exibir seus **detalhes completos**.
