@@ -23,6 +23,13 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/explicit-module-boundary-types': 'warn',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      'no-unused-vars': 'warn',
+      'semi': ['warn', 'always'],
+      'quotes': ['warn', 'single'],
+      'indent': ['warn', 2],
     },
   },
 )
