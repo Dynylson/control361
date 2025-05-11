@@ -22,7 +22,7 @@ const mockVehicles = [
       lat: -23.5515,
       lng: -46.6343,
       ignition: 'Desligado',
-      updatedAt: new Date(Date.now() - 3600000).toISOString() // 1 hora atrás
+      updatedAt: new Date(Date.now() - 3600000).toISOString()
     }
   }
 ];
@@ -40,7 +40,7 @@ const setupMocks = async (page: Page) => {
 test.describe('FleetMap Component', () => {
   test.beforeEach(async ({ page }) => {
     await setupMocks(page);
-    await page.goto(process.env.VITE_BASE_URL_API || 'http://localhost:5173');
+    await page.goto(process.env.VITE_BASE_URL || 'http://localhost:5173');
   });
 
   test('should render the map with correct title', async ({ page }) => {
@@ -51,7 +51,7 @@ test.describe('FleetMap Component', () => {
     await page.route('**/api/vehicles', route => {
     });
     
-    await page.goto(process.env.VITE_BASE_URL_API || 'http://localhost:5173');
+    await page.goto(process.env.VITE_BASE_URL || 'http://localhost:5173');
     await expect(page.locator('.animate-spin-fleetmap')).toBeVisible();
   });
 
