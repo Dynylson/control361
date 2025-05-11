@@ -48,8 +48,7 @@ test.describe('FleetMap Component', () => {
   });
 
   test('should display loading spinner when data is loading', async ({ page }) => {
-    await page.route('**/api/vehicles', route => {
-    });
+    await page.route('**/api/vehicles', route => route.continue());
     
     await page.goto(process.env.VITE_BASE_URL || 'http://localhost:5173');
     await expect(page.locator('.animate-spin-fleetmap')).toBeVisible();
