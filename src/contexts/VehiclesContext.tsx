@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import type { Vehicle } from "./VehiclesProvider";
+import { createContext } from 'react';
+import type { Vehicle } from './VehiclesProvider';
 
 interface VehiclesContextType {
   vehicles: Vehicle[];

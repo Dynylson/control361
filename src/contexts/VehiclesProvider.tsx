@@ -1,7 +1,7 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { api } from "../services/axios";
-import { VehiclesContext } from "./VehiclesContext";
-import { useState, useEffect } from "react";
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { api } from '../services/axios';
+import { VehiclesContext } from './VehiclesContext';
+import { useState, useEffect } from 'react';
 
 interface VehicleLocation {
   lat: number;
@@ -61,9 +61,9 @@ export function VehiclesProvider({ children }: { children: React.ReactNode }) {
     isFetchingNextPage,
     refetch
   } = useInfiniteQuery({
-    queryKey: ["vehicles", vehicleType],
+    queryKey: ['vehicles', vehicleType],
     queryFn: async ({ pageParam = 1 }) => {
-      const { data } = await api.get("/recruitment/vehicles/list-with-paginate", {
+      const { data } = await api.get('/recruitment/vehicles/list-with-paginate', {
         params: {
           type: vehicleType,
           page: pageParam,

@@ -1,5 +1,5 @@
-import { useInView } from "react-intersection-observer";
-import { useVehicles } from "../../hooks/useVehicles";
+import { useInView } from 'react-intersection-observer';
+import { useVehicles } from '../../hooks/useVehicles';
 
 const vehicleTypesMap = {
   vehicle: 'Veículo',

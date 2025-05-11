@@ -1,8 +1,8 @@
-import { AuthorHeader } from "./components/AuthorHeader"
-import { FleetMap } from "./components/FleetMap"
-import { VehiclesGrid } from "./components/VehiclesGrid"
-import { VehicleToolbar } from "./components/VehicleToolbar"
-import { VehiclesProvider } from "./contexts/VehiclesProvider"
+import { AuthorHeader } from './components/AuthorHeader';
+import { FleetMap } from './components/FleetMap';
+import { VehiclesGrid } from './components/VehiclesGrid';
+import { VehicleToolbar } from './components/VehicleToolbar';
+import { VehiclesProvider } from './contexts/VehiclesProvider';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         </div>
       </main>
     </VehiclesProvider>
-  )
+  );
 }
 
-export default App
+export default App;

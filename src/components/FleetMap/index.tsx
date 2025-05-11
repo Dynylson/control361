@@ -45,15 +45,15 @@ export function FleetMap() {
   };
 
   const getCenterPosition = (): LatLngExpression => {
-  if (vehiclesWithLocation.length > 0) {
-    const firstVehicle = vehiclesWithLocation[0];
-    return {
-      lat: firstVehicle.location.lat,
-      lng: firstVehicle.location.lng
-    };
-  }
-  return [-23.3231208, -46.7537495];
-};
+    if (vehiclesWithLocation.length > 0) {
+      const firstVehicle = vehiclesWithLocation[0];
+      return {
+        lat: firstVehicle.location.lat,
+        lng: firstVehicle.location.lng
+      };
+    }
+    return [-23.3231208, -46.7537495];
+  };
 
   if (isLoading) {
     return (
