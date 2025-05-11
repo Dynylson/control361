@@ -58,9 +58,9 @@ export function FleetMap() {
   if (isLoading) {
     return (
       <section className="bg-[#001622] rounded-2xl mt-6 border-[2px] border-[#002D44]">
-        <h2 className="font-semibold ml-5 pt-4">Mapa rastreador</h2>
+        <h2 className="font-semibold ml-5 pt-4 map-title">Mapa rastreador</h2>
         <div className="p-4 flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#0095E4]"></div>
+          <div className="animate-spin animate-spin-fleetmap rounded-full h-12 w-12 border-t-2 border-b-2 border-[#0095E4]"></div>
         </div>
       </section>
     );
@@ -68,13 +68,13 @@ export function FleetMap() {
 
   return (
     <section className="bg-[#001622] rounded-2xl mt-6 border-[2px] border-[#002D44]">
-      <h2 className="font-semibold ml-5 pt-4">Mapa rastreador</h2>
+      <h2 className="font-semibold ml-5 pt-4 map-title">Mapa rastreador</h2>
       <div className="p-4">
         <MapContainer 
           center={getCenterPosition()} 
           zoom={13}
           style={mapStyle}
-          className="z-0"
+          className="z-0 map-container"
         >
           <TileLayer
             url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
@@ -101,10 +101,10 @@ export function FleetMap() {
                     </p>
                     <p>
                       <span className="font-semibold">Última atualização:</span>{' '}
-                      {lastUpdate.toLocaleDateString('pt-BR')} {lastUpdate.toLocaleTimeString('pt-BR')}
+                      <span className="last-update">{lastUpdate.toLocaleDateString('pt-BR')} {lastUpdate.toLocaleTimeString('pt-BR')}</span>
                     </p>
                     <a
-                      className="w-full text-center border-b-2"
+                      className="w-full text-center border-b-2 coordinates-maps"
                       href={`https://www.google.com/maps?q=${vehicle.location.lat},${vehicle.location.lng}`}
                       target="_blank"
                     >
