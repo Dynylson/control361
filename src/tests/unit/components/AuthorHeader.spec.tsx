@@ -1,7 +1,7 @@
 // AuthorHeader.spec.tsx
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import { AuthorHeader } from '../../components/AuthorHeader';
+import { AuthorHeader } from '../../../components/AuthorHeader';
 
 describe('AuthorHeader Component', () => {
   it('should render the author name correctly', () => {

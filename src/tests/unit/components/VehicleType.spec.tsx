@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { VehiclesContext } from '../../contexts/VehiclesContext';
-import { VehicleType } from '../../components/VehicleToolbar/components/VehicleType';
+import { VehiclesContext } from '../../../contexts/VehiclesContext';
+import { VehicleType } from '../../../components/VehicleToolbar/components/VehicleType';
 
 const mockSetVehicleType = vi.fn();
 
