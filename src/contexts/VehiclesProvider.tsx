@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { api } from "../services/axios";
 import { VehiclesContext } from "./VehiclesContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface VehicleLocation {
   lat: number;
@@ -18,7 +18,7 @@ export interface Vehicle {
   model: string;
   nameOwner: string;
   status: 'active';
-  location?: VehicleLocation
+  location?: VehicleLocation;
 }
 
 interface LocationVehicle {
@@ -46,9 +46,11 @@ type FetchVehiclesResponse = {
 };
 
 const PER_PAGE = 20;
+const REFRESH_INTERVAL = 2 * 60 * 1000; // 2 minutes
 
 export function VehiclesProvider({ children }: { children: React.ReactNode }) {
   const [vehicleType, setVehicleType] = useState<string>('tracked');
+  const [isWindowVisible, setIsWindowVisible] = useState(true);
 
   const {
     data,
@@ -57,6 +59,7 @@ export function VehiclesProvider({ children }: { children: React.ReactNode }) {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    refetch
   } = useInfiniteQuery({
     queryKey: ["vehicles", vehicleType],
     queryFn: async ({ pageParam = 1 }) => {
@@ -74,25 +77,48 @@ export function VehiclesProvider({ children }: { children: React.ReactNode }) {
       const { page, totalPages } = lastPage.content;
       return page < totalPages ? page + 1 : undefined;
     },
+    refetchOnWindowFocus: false,
   });
 
-  const vehiclesWithLocation = data?.pages.flatMap(page => {
-  return page.content.vehicles.map(vehicle => {
-    const latestLocation = page.content.locationVehicles
-      ?.filter(loc => loc.plate === vehicle.plate)
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0];
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      setIsWindowVisible(!document.hidden);
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     
-    return {
-      ...vehicle,
-      location: latestLocation ? {
-        lat: latestLocation.lat,
-        lng: latestLocation.lng,
-        ignition: latestLocation.ignition,
-        updatedAt: latestLocation.createdAt
-      } : undefined
-    } as Vehicle;
-  });
-}) || [];
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isWindowVisible) return;
+
+    const interval = setInterval(() => {
+      refetch();
+    }, REFRESH_INTERVAL);
+
+    return () => clearInterval(interval);
+  }, [refetch, isWindowVisible]);
+
+  const vehiclesWithLocation = data?.pages.flatMap(page => {
+    return page.content.vehicles.map(vehicle => {
+      const latestLocation = page.content.locationVehicles
+        ?.filter(loc => loc.plate === vehicle.plate)
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0];
+      
+      return {
+        ...vehicle,
+        location: latestLocation ? {
+          lat: latestLocation.lat,
+          lng: latestLocation.lng,
+          ignition: latestLocation.ignition,
+          updatedAt: latestLocation.createdAt
+        } : undefined
+      } as Vehicle;
+    });
+  }) || [];
 
   const value = {
     vehicles: vehiclesWithLocation,
@@ -102,7 +128,11 @@ export function VehiclesProvider({ children }: { children: React.ReactNode }) {
     hasNextPage: !!hasNextPage,
     isFetchingNextPage,
     vehicleType,
-    setVehicleType,
+    setVehicleType: (type: string) => {
+      setVehicleType(type);
+      refetch();
+    },
+    refreshVehicles: refetch,
   };
 
   return (

@@ -101,7 +101,7 @@ export function FleetMap() {
                     </p>
                     <p>
                       <span className="font-semibold">Última atualização:</span>{' '}
-                      {lastUpdate.toLocaleDateString()} {lastUpdate.toLocaleTimeString()}
+                      {lastUpdate.toLocaleDateString('pt-BR')} {lastUpdate.toLocaleTimeString('pt-BR')}
                     </p>
                     <a
                       className="w-full text-center border-b-2"
