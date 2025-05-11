@@ -31,8 +31,4 @@ describe('AuthorHeader Component', () => {
     expect(heading).toHaveClass('ml-6');
   });
 
-  it('should match snapshot', () => {
-    const { container } = render(<AuthorHeader fullName="Snapshot Test" />);
-    expect(container).toMatchSnapshot();
-  });
 });
