@@ -20,7 +20,7 @@ git clone https://github.com/Dynylson/control361.git
 2. Acesse a pasta do projeto:
 
 ```bash
-cd nome-do-repositorio
+cd control361
 ```
 
 3. Instale as dependências:
