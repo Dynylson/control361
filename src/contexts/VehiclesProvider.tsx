@@ -3,6 +3,13 @@ import { api } from "../services/axios";
 import { VehiclesContext } from "./VehiclesContext";
 import { useState } from "react";
 
+interface VehicleLocation {
+  lat: number;
+  lng: number;
+  ignition: 'Ligado' | 'Desligado';
+  updatedAt: string;
+}
+
 export interface Vehicle {
   id: string;
   plate: string;
@@ -11,6 +18,19 @@ export interface Vehicle {
   model: string;
   nameOwner: string;
   status: 'active';
+  location?: VehicleLocation
+}
+
+interface LocationVehicle {
+  id: string;
+  fleet: string;
+  equipmentId: string;
+  name: string;
+  plate: string;
+  ignition: 'Ligado' | 'Desligado';
+  lat: number;
+  lng: number;
+  createdAt: string;
 }
 
 type FetchVehiclesResponse = {
@@ -18,6 +38,7 @@ type FetchVehiclesResponse = {
   message: string;
   content: {
     vehicles: Vehicle[];
+    locationVehicles: LocationVehicle[];
     totalPages: number;
     page: number;
     perPage: number;
@@ -55,10 +76,26 @@ export function VehiclesProvider({ children }: { children: React.ReactNode }) {
     },
   });
 
-  const vehicles = data?.pages.flatMap((page) => page.content.vehicles) || [];
+  const vehiclesWithLocation = data?.pages.flatMap(page => {
+  return page.content.vehicles.map(vehicle => {
+    const latestLocation = page.content.locationVehicles
+      ?.filter(loc => loc.plate === vehicle.plate)
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0];
+    
+    return {
+      ...vehicle,
+      location: latestLocation ? {
+        lat: latestLocation.lat,
+        lng: latestLocation.lng,
+        ignition: latestLocation.ignition,
+        updatedAt: latestLocation.createdAt
+      } : undefined
+    } as Vehicle;
+  });
+}) || [];
 
   const value = {
-    vehicles,
+    vehicles: vehiclesWithLocation,
     isLoading,
     error: error as Error | null,
     fetchNextPage,
