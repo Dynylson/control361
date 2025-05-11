@@ -2,7 +2,7 @@
 
 - 🗺️ **Mapa**
   - [X] Deve exibir **todos os veículos simultaneamente**.
-  - [ ] Deve ser **atualizado automaticamente a cada 2 minutos** com os dados mais recentes.
+  - [X] Deve ser **atualizado automaticamente a cada 2 minutos** com os dados mais recentes.
 
 - 📋 **Lista de Veículos**
   - [X] Deve carregar **20 veículos por vez**.
