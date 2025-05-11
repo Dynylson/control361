@@ -6,14 +6,14 @@ import type { Vehicle } from '../../contexts/VehiclesProvider';
 
 const vehicleIcons = {
   moving: new L.Icon({
-    iconUrl: './src/assets/truck-active.svg',
+    iconUrl: '/assets/truck-active.svg',
     iconSize: [60, 60],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32],
     className: 'moving-vehicle-icon'
   }),
   stopped: new L.Icon({
-    iconUrl: './src/assets/truck-inactive.svg',
+    iconUrl: '/assets/truck-inactive.svg',
     iconSize: [60, 60],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32],
